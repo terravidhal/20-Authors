@@ -4,6 +4,7 @@ const Author = require('../models/author.model');
 
 module.exports.findAllAuthors = (req, res) => {
     Author.find()
+        .sort({ name: 1 }) // Trie les auteurs par ordre alphabétique du nom d'utilisateur/ -1 implique ordre decroissant
         .then((allDaAuthors) => {
             res.json({ authors: allDaAuthors })
         })
@@ -11,6 +12,8 @@ module.exports.findAllAuthors = (req, res) => {
              res.status(400).json(err) 
         });
 }
+
+
  
 module.exports.findOneSingleAuthor = (req, res) => {
     Author.findOne({ _id: req.params.id })
